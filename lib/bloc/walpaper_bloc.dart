@@ -12,19 +12,6 @@ import 'package:walpaper_api/model.dart';
 class WalpaperBloc extends Bloc<WalpaperEvent, WalpaperState> {
   ApiHelper apiHelper;
   WalpaperBloc({required this.apiHelper}) : super(WalpaperInitial()) {
-    on<GetSearchWalpaperEvent>((event, emit) async {
-      // TODO: implement event handler
-      emit(WalpaperLoading());
-      try {
-        var rawData =
-            await apiHelper.getApi("${Url.Search_Url}?query=${event.query}");
-
-        var DataModel = jsonDecode(rawData);
-        emit(WalpaperLoaded(mData: DataModel));
-      } catch (e) {
-        print(e);
-      }
-    });
     on<GetTrendWalpaper>((event, emit) async {
       // TODO: implement event handler
       emit(WalpaperLoading());
@@ -33,7 +20,7 @@ class WalpaperBloc extends Bloc<WalpaperEvent, WalpaperState> {
         var DataModel = FinalModel.fromJason(rawData);
         emit(WalpaperLoaded(mData: DataModel));
       } catch (e) {
-        // emit(WalpaperError(error: (e as AppException).toErrorMsg()));
+        emit(WalpaperError(error: (e as AppException).toErrorMsg()));
       }
     });
   }

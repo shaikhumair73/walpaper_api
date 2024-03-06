@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:walpaper_api/UI_pages/UI_using_bloc.dart';
-import 'package:walpaper_api/UI_pages/UI_using_future_builder.dart';
+
 import 'package:walpaper_api/main.dart';
 
 class SplashPage extends StatefulWidget {
@@ -17,7 +17,7 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer(Duration(seconds: 3), () {
+    Timer(Duration(seconds: 2), () {
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
         return My_Page();
       }));
