@@ -1,13 +1,15 @@
 import 'dart:convert';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:walpaper_api/datasource/remote/apihelperclass.dart';
 import 'package:walpaper_api/datasource/remote/app_exception.dart';
 import 'package:walpaper_api/datasource/remote/urls.dart';
 import 'package:walpaper_api/model.dart';
+import 'package:walpaper_api/search_bloc/search_walpaper_bloc.dart';
+import 'package:walpaper_api/search_bloc/search_walpaper_state.dart';
 
 part 'search_walpaper_event.dart';
-part 'search_walpaper_state.dart';
 
 class SearchWalpaperBloc
     extends Bloc<SearchWalpaperEvent, SearchWalpaperState> {

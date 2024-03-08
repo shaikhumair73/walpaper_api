@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:walpaper_api/UI_pages/walpaperDetailPage.dart';
-import 'package:walpaper_api/bloc/walpaper_state.dart';
+import 'package:walpaper_api/colorModel.dart';
 import 'package:walpaper_api/model.dart';
 import 'package:walpaper_api/search_bloc/search_walpaper_bloc.dart';
+import 'package:flutter_blurhash/flutter_blurhash.dart';
+import 'package:walpaper_api/search_bloc/search_walpaper_state.dart';
 
 class Screen extends StatefulWidget {
   String? search;
@@ -16,9 +19,28 @@ class Screen extends StatefulWidget {
 }
 
 class _ScreenState extends State<Screen> {
+  List<String> blurHashes = [
+    'LEHV6nWB2yk8pyo0adR*.7kCMdnj',
+    'LKO2?U%2Tw=w]~RBVZRi};RPxuwH',
+    'LKO2?U%2Tw=w]~RBVZRi};RPxuwH',
+    // Add more BlurHash strings as needed
+  ];
+  List<Model1> listdata = [
+    Model1(colorCode: "ffffff", colorValue: Colors.white24),
+    Model1(colorCode: "000000", colorValue: Colors.black),
+    Model1(colorCode: "0000ff", colorValue: Colors.blue),
+    Model1(colorCode: "00ff00", colorValue: Colors.green),
+    Model1(colorCode: "ff0000", colorValue: Colors.red),
+    Model1(colorCode: "9C27B0", colorValue: Colors.purple),
+    Model1(colorCode: "FF9800", colorValue: Colors.orange),
+  ];
+
+  List<Photos> listPhotos = [];
   int pageNo = 1;
   FinalModel? dataModel;
+
   var searchcontroler = TextEditingController();
+  var controler = TextEditingController();
   ScrollController? scrollController;
   @override
   void initState() {
@@ -30,10 +52,15 @@ class _ScreenState extends State<Screen> {
         if (scrollController!.position.pixels ==
             scrollController!.position.maxScrollExtent) {
           print("end of grid");
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text("end of grid")));
+          Align(
+              alignment: Alignment.bottomCenter,
+              child: CircularProgressIndicator());
+          pageNo++;
+          //hit api with updated page index
           BlocProvider.of<SearchWalpaperBloc>(context).add(Get_search_wal(
-              queryy: widget.search!, cololrCode: widget.colorCode ?? ""));
+              queryy: widget.search!,
+              cololrCode: widget.colorCode ?? "",
+              page: pageNo));
         }
       });
     BlocProvider.of<SearchWalpaperBloc>(context).add(Get_search_wal(
@@ -82,15 +109,16 @@ class _ScreenState extends State<Screen> {
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.01,
             ),
-            BlocBuilder<SearchWalpaperBloc, SearchWalpaperState>(
-              builder: (context, state) {
-                if (state is SearchWalpaperLoading) {
-                  return CircularProgressIndicator();
-                } else if (state is SearchWalpaperError) {
-                  return Text("error : ${state.error}");
-                } else if (state is SearchWalpaperLoaded) {
+            BlocListener<SearchWalpaperBloc, SearchWalpaperState>(
+              listener: (context, state) {
+                if (state is SearchWalpaperLoaded) {
                   dataModel = state.mdata;
-                  return GridView.builder(
+                  listPhotos.addAll(dataModel!.photos!);
+                  setState(() {});
+                }
+              },
+              child: listPhotos.isNotEmpty
+                  ? GridView.builder(
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -98,9 +126,9 @@ class _ScreenState extends State<Screen> {
                           crossAxisSpacing: 5,
                           mainAxisSpacing: 5,
                           childAspectRatio: 9 / 16),
-                      itemCount: dataModel!.photos!.length,
+                      itemCount: listPhotos.length,
                       itemBuilder: (context, index) {
-                        var img = dataModel!.photos![index];
+                        var img = listPhotos[index];
                         return Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: ClipRRect(
@@ -121,10 +149,10 @@ class _ScreenState extends State<Screen> {
                             ),
                           ),
                         );
-                      });
-                }
-                return Container();
-              },
+                      })
+                  : SizedBox(
+                      child: CircularProgressIndicator(),
+                    ),
             ),
           ],
         ),

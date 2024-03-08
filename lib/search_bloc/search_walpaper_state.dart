@@ -1,4 +1,4 @@
-part of 'search_walpaper_bloc.dart';
+import 'package:walpaper_api/model.dart';
 
 abstract class SearchWalpaperState {}
 
@@ -7,7 +7,7 @@ class SearchWalpaperInitial extends SearchWalpaperState {}
 class SearchWalpaperLoading extends SearchWalpaperState {}
 
 class SearchWalpaperLoaded extends SearchWalpaperState {
-  final FinalModel mdata;
+  FinalModel mdata;
   SearchWalpaperLoaded({required this.mdata});
 }
 

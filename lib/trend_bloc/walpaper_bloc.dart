@@ -1,13 +1,13 @@
 import 'dart:convert';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:walpaper_api/bloc/walpaper_bloc.dart';
-import 'package:walpaper_api/bloc/walpaper_event.dart';
-import 'package:walpaper_api/bloc/walpaper_state.dart';
+
 import 'package:walpaper_api/datasource/remote/apihelperclass.dart';
 import 'package:walpaper_api/datasource/remote/app_exception.dart';
 import 'package:walpaper_api/datasource/remote/urls.dart';
 import 'package:walpaper_api/model.dart';
+import 'package:walpaper_api/trend_bloc/walpaper_event.dart';
+import 'package:walpaper_api/trend_bloc/walpaper_state.dart';
 
 class WalpaperBloc extends Bloc<WalpaperEvent, WalpaperState> {
   ApiHelper apiHelper;

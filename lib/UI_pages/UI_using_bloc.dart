@@ -3,16 +3,18 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as httpClient;
+
 import 'package:walpaper_api/UI_pages/search_Screen.dart';
 import 'package:walpaper_api/UI_pages/walpaperDetailPage.dart';
-import 'package:walpaper_api/bloc/walpaper_bloc.dart';
-import 'package:walpaper_api/bloc/walpaper_event.dart';
-import 'package:walpaper_api/bloc/walpaper_state.dart';
 import 'package:walpaper_api/categoryModel.dart';
 import 'package:walpaper_api/colorModel.dart';
 import 'package:walpaper_api/datasource/remote/apihelperclass.dart';
 import 'package:walpaper_api/model.dart';
+
 import 'package:walpaper_api/search_bloc/search_walpaper_bloc.dart';
+import 'package:walpaper_api/trend_bloc/walpaper_bloc.dart';
+import 'package:walpaper_api/trend_bloc/walpaper_event.dart';
+import 'package:walpaper_api/trend_bloc/walpaper_state.dart';
 
 class My_Page extends StatefulWidget {
   const My_Page({super.key});
@@ -98,6 +100,7 @@ class _My_PageState extends State<My_Page> {
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: SizedBox(
                   height: MediaQuery.of(context).size.height * 0.07,
+                  width: MediaQuery.of(context).size.width * 1,
                   child: TextField(
                       controller: controler,
                       decoration: InputDecoration(
@@ -197,7 +200,7 @@ class _My_PageState extends State<My_Page> {
                 height: 10,
               ),
               SizedBox(
-                height: 75,
+                height: MediaQuery.of(context).size.height * 0.09,
                 child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: listdata.length,
@@ -227,6 +230,7 @@ class _My_PageState extends State<My_Page> {
                       );
                     }),
               ),
+
               //search walpaper
               Padding(
                 padding: const EdgeInsets.only(right: 240),

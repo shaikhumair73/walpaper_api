@@ -17,7 +17,7 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer(Duration(seconds: 2), () {
+    Timer(Duration(seconds: 3), () {
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
         return My_Page();
       }));
@@ -27,28 +27,21 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          SizedBox(
-            width: double.infinity,
-            height: double.infinity,
-            child: Image.asset(
-              "assets/images/pexels-irina-iriser-1590549.jpg", fit: BoxFit.fill,
-
-              // width: 150,
-              // height: 200,
-            ),
-          ),
-          Center(
+      body: Container(
+          width: double.infinity,
+          height: double.infinity,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+            image:
+                AssetImage("assets/images/pexels-tausif-hossain-1226302.jpg"),
+            fit: BoxFit.fill,
+          )),
+          child: Center(
               child: Text(
-            "walpaper app",
+            "HD Walpaper",
             style: TextStyle(
-                fontSize: 45,
-                fontWeight: FontWeight.bold,
-                fontStyle: FontStyle.italic),
-          ))
-        ],
-      ),
+                fontStyle: FontStyle.italic, fontSize: 50, color: Colors.white),
+          ))),
     );
   }
 }
