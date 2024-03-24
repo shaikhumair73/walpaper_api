@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:walpaper_api/UI_pages/walpaperDetailPage.dart';
+import 'package:walpaper_api/UI_pages/wallpaperDetailPage.dart';
 import 'package:walpaper_api/colorModel.dart';
 import 'package:walpaper_api/model.dart';
 import 'package:walpaper_api/search_bloc/search_walpaper_bloc.dart';
@@ -72,7 +72,7 @@ class _ScreenState extends State<Screen> {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Text("walpaper"),
+        title: Text("wallpaper"),
       ),
       body: SingleChildScrollView(
         controller: scrollController,
@@ -99,7 +99,7 @@ class _ScreenState extends State<Screen> {
                             },
                             child: Text("enter")),
                         //icon: Icon(Icons.search),
-                        hintText: "search walpaper",
+                        hintText: "search wallpaper",
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
                           borderSide: BorderSide(color: Colors.white24),
@@ -111,7 +111,9 @@ class _ScreenState extends State<Screen> {
             ),
             BlocListener<SearchWalpaperBloc, SearchWalpaperState>(
               listener: (context, state) {
-                if (state is SearchWalpaperLoaded) {
+                if (state is SearchWalpaperLoading) {
+                  CircularProgressIndicator();
+                } else if (state is SearchWalpaperLoaded) {
                   dataModel = state.mdata;
                   listPhotos.addAll(dataModel!.photos!);
                   setState(() {});

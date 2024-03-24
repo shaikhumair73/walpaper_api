@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as httpClient;
 
 import 'package:walpaper_api/UI_pages/search_Screen.dart';
-import 'package:walpaper_api/UI_pages/walpaperDetailPage.dart';
+import 'package:walpaper_api/UI_pages/wallpaperDetailPage.dart';
 import 'package:walpaper_api/categoryModel.dart';
 import 'package:walpaper_api/colorModel.dart';
 import 'package:walpaper_api/datasource/remote/apihelperclass.dart';
@@ -87,7 +87,7 @@ class _My_PageState extends State<My_Page> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "walpaper",
+          "wallpaper",
           style: TextStyle(fontSize: 28),
         ),
       ),
@@ -118,7 +118,7 @@ class _My_PageState extends State<My_Page> {
                               },
                               child: Text("enter")),
                           //icon: Icon(Icons.search),
-                          hintText: "search walpaper",
+                          hintText: "search wallpaper",
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
                             borderSide: BorderSide(color: Colors.white24),

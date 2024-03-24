@@ -14,7 +14,7 @@ class WalpaperPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("walpaper"),
+        title: Text("wallpaper"),
       ),
       body: Stack(
         children: [

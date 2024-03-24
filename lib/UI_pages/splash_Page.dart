@@ -38,7 +38,7 @@ class _SplashPageState extends State<SplashPage> {
           )),
           child: Center(
               child: Text(
-            "HD Walpaper",
+            "HD Wallpaper",
             style: TextStyle(
                 fontStyle: FontStyle.italic, fontSize: 50, color: Colors.white),
           ))),
